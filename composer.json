@@ -1,0 +1,17 @@
+{
+  "name": "pushwoosh/rate-limiting-example",
+  "authors": [
+    {
+      "name": "Nikita Kolosov"
+    }
+  ],
+  "license": "MIT",
+  "require": {
+    "php" : ">=7.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Pushwoosh\\RateLimiting\\" : "./src"
+    }
+  }
+}
