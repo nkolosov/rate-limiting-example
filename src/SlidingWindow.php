@@ -39,13 +39,13 @@ class SlidingWindow implements RateLimitingInterface
         }
 
         $percent = 1 - ($currentTime - $time);
-        $previous = 0;
-
         if (isset($this->limits[$time - 1])) {
-            $previous = $this->limits[$time - 1] * $percent;
+            $previous = $this->limits[$time - 1];
+        } else {
+            $previous = $this->rate;
         }
 
-        if (($this->limits[$time] + $previous) <= $this->rate) {
+        if (($this->limits[$time] + ($previous  * $percent)) <= $this->rate) {
             $this->limits[$time]++;
             return true;
         }

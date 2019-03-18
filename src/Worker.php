@@ -73,20 +73,21 @@ class Worker
     public function doWork(float $quantum)
     {
         $finishTime = microtime(true) + $quantum;
+
         while (true) {
             $currentTime = microtime(true);
             if ($currentTime >= $finishTime) {
-                return;
+                break;
             }
 
             if (!$this->limiter->canDoWork($currentTime)) {
-                return;
+                continue;
             }
 
             $result = fgets($this->f);
             if ($result === false) {
                 $this->complete();
-                return;
+                break;
             }
 
             $this->processedCount++;
